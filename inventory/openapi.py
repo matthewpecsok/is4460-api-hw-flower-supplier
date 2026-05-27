@@ -31,6 +31,10 @@ OPENAPI_SCHEMA = {
                                         {
                                             "id": 1,
                                             "type_of_flower": "Rose",
+                                            "description": (
+                                                "Classic long-stem roses for bouquets, "
+                                                "arrangements, and events."
+                                            ),
                                             "quantity": 250,
                                             "cost": "2.50",
                                         }
@@ -72,6 +76,10 @@ OPENAPI_SCHEMA = {
                                     "purchased": {
                                         "id": 1,
                                         "type_of_flower": "Rose",
+                                        "description": (
+                                            "Classic long-stem roses for bouquets, "
+                                            "arrangements, and events."
+                                        ),
                                         "quantity": 238,
                                         "cost": "2.50",
                                         "purchased_quantity": 12,
@@ -118,7 +126,13 @@ OPENAPI_SCHEMA = {
         "schemas": {
             "FlowerInventoryItem": {
                 "type": "object",
-                "required": ["id", "type_of_flower", "quantity", "cost"],
+                "required": [
+                    "id",
+                    "type_of_flower",
+                    "description",
+                    "quantity",
+                    "cost",
+                ],
                 "properties": {
                     "id": {
                         "type": "integer",
@@ -127,6 +141,13 @@ OPENAPI_SCHEMA = {
                     "type_of_flower": {
                         "type": "string",
                         "example": "Rose",
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": (
+                            "Classic long-stem roses for bouquets, arrangements, "
+                            "and events."
+                        ),
                     },
                     "quantity": {
                         "type": "integer",

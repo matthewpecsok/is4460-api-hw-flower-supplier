@@ -21,6 +21,7 @@ away.
 Each inventory item has:
 
 - `type_of_flower`
+- `description`
 - `quantity`
 - `cost`
 

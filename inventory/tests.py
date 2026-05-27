@@ -12,6 +12,7 @@ class InventoryApiTests(TestCase):
     def test_get_lists_inventory(self):
         item = FlowerInventory.objects.create(
             type_of_flower="Tulip",
+            description="Bright seasonal tulips with clean stems and vibrant petals.",
             quantity=50,
             cost="1.25",
         )
@@ -26,6 +27,9 @@ class InventoryApiTests(TestCase):
                     {
                         "id": item.id,
                         "type_of_flower": "Tulip",
+                        "description": (
+                            "Bright seasonal tulips with clean stems and vibrant petals."
+                        ),
                         "quantity": 50,
                         "cost": "1.25",
                     }
@@ -36,6 +40,7 @@ class InventoryApiTests(TestCase):
     def test_post_purchases_inventory(self):
         item = FlowerInventory.objects.create(
             type_of_flower="Rose",
+            description="Classic long-stem roses for bouquets and events.",
             quantity=100,
             cost="2.50",
         )
@@ -53,6 +58,7 @@ class InventoryApiTests(TestCase):
                 "purchased": {
                     "id": item.id,
                     "type_of_flower": "Rose",
+                    "description": "Classic long-stem roses for bouquets and events.",
                     "quantity": 88,
                     "cost": "2.50",
                     "purchased_quantity": 12,
@@ -73,6 +79,10 @@ class InventoryApiTests(TestCase):
         self.assertIn("/inventory/", schema["paths"])
         self.assertIn("get", schema["paths"]["/inventory/"])
         self.assertIn("post", schema["paths"]["/inventory/"])
+        self.assertIn(
+            "description",
+            schema["components"]["schemas"]["FlowerInventoryItem"]["required"],
+        )
 
     def test_swagger_ui_loads_openapi_schema(self):
         response = self.client.get("/swagger/")

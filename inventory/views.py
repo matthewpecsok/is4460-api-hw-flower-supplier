@@ -13,6 +13,7 @@ def serialize_inventory_item(item, purchased_quantity=None):
     data = {
         "id": item.id,
         "type_of_flower": item.type_of_flower,
+        "description": item.description,
         "quantity": item.quantity,
         "cost": str(item.cost),
     }

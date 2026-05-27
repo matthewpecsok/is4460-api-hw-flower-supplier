@@ -3,6 +3,7 @@ from django.db import models
 
 class FlowerInventory(models.Model):
     type_of_flower = models.CharField(max_length=100)
+    description = models.TextField(blank=True, default="")
     quantity = models.PositiveIntegerField()
     cost = models.DecimalField(max_digits=8, decimal_places=2)
 
