@@ -26,6 +26,18 @@ Each inventory item has:
 
 ### API
 
+Swagger docs are available after starting the server:
+
+```bash
+http://127.0.0.1:8000/swagger/
+```
+
+The raw OpenAPI schema is available at:
+
+```bash
+http://127.0.0.1:8000/swagger.json
+```
+
 List all available bulk inventory:
 
 ```bash

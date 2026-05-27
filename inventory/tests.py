@@ -63,3 +63,20 @@ class InventoryApiTests(TestCase):
 
         item.refresh_from_db()
         self.assertEqual(item.quantity, 88)
+
+    def test_swagger_json_documents_inventory_endpoint(self):
+        response = self.client.get("/swagger.json")
+
+        self.assertEqual(response.status_code, 200)
+        schema = response.json()
+        self.assertEqual(schema["openapi"], "3.0.3")
+        self.assertIn("/inventory/", schema["paths"])
+        self.assertIn("get", schema["paths"]["/inventory/"])
+        self.assertIn("post", schema["paths"]["/inventory/"])
+
+    def test_swagger_ui_loads_openapi_schema(self):
+        response = self.client.get("/swagger/")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "SwaggerUIBundle")
+        self.assertContains(response, "/swagger.json")

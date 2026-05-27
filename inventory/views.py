@@ -2,10 +2,11 @@ import json
 from decimal import Decimal
 
 from django.db import transaction
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import FlowerInventory
+from .openapi import OPENAPI_SCHEMA, SWAGGER_UI_HTML
 
 
 def serialize_inventory_item(item, purchased_quantity=None):
@@ -19,6 +20,14 @@ def serialize_inventory_item(item, purchased_quantity=None):
         data["purchased_quantity"] = purchased_quantity
         data["purchase_total"] = str(item.cost * Decimal(purchased_quantity))
     return data
+
+
+def swagger_json(request):
+    return JsonResponse(OPENAPI_SCHEMA)
+
+
+def swagger_ui(request):
+    return HttpResponse(SWAGGER_UI_HTML)
 
 
 @csrf_exempt
